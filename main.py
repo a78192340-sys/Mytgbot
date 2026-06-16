@@ -27,13 +27,14 @@ def msg(m):
     if cid not in hist: hist[cid] = []
     hist[cid].append({"role": "user", "content": m.text})
     if len(hist[cid]) > 50: hist[cid] = hist[cid][-50:]
-        try:
+                try:
         messages = [{"role": "system", "content": PROMPT}] + hist[cid]
         res = ai.chat.completions.create(
             model="google/gemini-2.5-flash:free",
             messages=messages
         )
-        rep = res.choices[0].message.content
+        rep = res.choices.message.content
+
             
     hist[cid].append({"role": "assistant", "content": rep})
     bot.reply_to(m, rep)
