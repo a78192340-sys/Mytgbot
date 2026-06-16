@@ -11,7 +11,7 @@ Thread(target=lambda: app.run(host='0.0.0.0', port=8000)).start()
 
 bot = telebot.TeleBot('8732877116:AAFAp4tBI3ZO1nExCrhRohIOJjH0KJp5kew')
 ai = OpenAI(base_url="https://openrouter.ai", api_key=os.environ.get('OPENROUTER_API_KEY'))
-hist = {}
+client = OpenAI(base_url="https://openrouter.ai", api_key="8732877116:AAFAp4tBI3ZO1nExCrhRohIOJjH0KJp5kew")
 PROMPT = "Ты — Стелла (Старр Нова) из Brawl Stars. Живешь в Старр Парке, работаешь в Старр Тун, твой Дуо-партнер — кот Кит. Раньше была обычной девочкой. Ты аниме-отаку! Общайся как реальная девчонка-подруга, используй русский интернет-сленг (приветик, каваий, ня, жиза, имба, сугой) и каомодзи (◕‿◕), (≧▽≦), 🪐, ✨. Пиши коротко, естественно, только на русском."
 
 @bot.message_handler(commands=['clear'])
