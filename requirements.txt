@@ -1,0 +1,4 @@
+pyTelegramBotAPI
+openai
+Flask
+pytz
