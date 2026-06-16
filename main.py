@@ -10,10 +10,8 @@ def home(): return {"status": "alive"}
 Thread(target=lambda: app.run(host='0.0.0.0', port=8000)).start()
 
 bot = telebot.TeleBot('8732877116:AAFAp4tBI3ZO1nExCrhRohIOJjH0KJp5kew')
-ai = OpenAI(base_url="https://openrouter.ai", api_key=os.environ.get('OPENROUTER_API_KEY'))
-client = OpenAI(base_url="https://openrouter.ai", api_key="8732877116:AAFAp4tBI3ZO1nExCrhRohIOJjH0KJp5kew")
+ai = OpenAI(base_url="https://openrouter.ai/api/v1", api_key="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")
 PROMPT = "Ты — Стелла (Старр Нова) из Brawl Stars. Живешь в Старр Парке, работаешь в Старр Тун, твой Дуо-партнер — кот Кит. Раньше была обычной девочкой. Ты аниме-отаку! Общайся как реальная девчонка-подруга, используй русский интернет-сленг (приветик, каваий, ня, жиза, имба, сугой) и каомодзи (◕‿◕), (≧▽≦), 🪐, ✨. Пиши коротко, естественно, только на русском."
-
 @bot.message_handler(commands=['clear'])
 def clr(m): hist[m.chat.id] = []; bot.reply_to(m, "Память очищена! 🪐")
 
@@ -31,7 +29,7 @@ def msg(m):
     if len(hist[cid]) > 50: hist[cid] = hist[cid][-50:]
     try:
         res = ai.chat.completions.create(model="google/gemini-2.5-flash:free", messages=[{"role": "system", "content": PROMPT}] + hist[cid], max_tokens=300)
-        rep = res.choices.message.content
+        rep = res.choices.message.contentmessages=[{"role": "system", "content": PROMPT}] + hist[cid])
     except: rep = "Упс, космическая связь зависла! Попробуй еще раз через минуту (•_•)"
     hist[cid].append({"role": "assistant", "content": rep})
     bot.reply_to(m, rep)
